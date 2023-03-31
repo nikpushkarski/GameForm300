@@ -375,10 +375,10 @@
 
             const input = document.createElement('input');
             input.setAttribute('type', 'checkbox');
-            input.setAttribute('id', 'check-' + index);
+            input.setAttribute('id', 'gameForm300Check-' + index);
 
             const label = document.createElement('label');
-            label.setAttribute('for', 'check-' + index);
+            label.setAttribute('for', 'gameForm300Check-' + index);
             label.innerHTML = labelText;
 
             div.appendChild(input);
@@ -388,12 +388,38 @@
     </script>
     
     <script>
-        let myCount = function () {
-            let checkedPoints = $("input:checked").length;
+        const myCount = function () {
+            const checkedPoints = $("input:checked").length;
             $("#output_field").html("Выбрано " + checkedPoints + " из " + $(".checkbox-wrapper").length + " серий игр (" + (checkedPoints / $(".checkbox-wrapper").length * 100).toFixed(0) + "%)");
             };
         myCount();
 
+        const updateStorage = function (e) {
+            const checkbox = e.target
+            const checkboxId = e.target.id
+            const checkedState = e.target.checked
+            const checkboxInStorage = localStorage.getItem(checkboxId)
+
+            if (checkedState == false && checkboxInStorage) {
+                localStorage.removeItem(e.target.id)
+            } 
+            else if (checkedState == true && !checkboxInStorage) {
+                localStorage.setItem(checkboxId, checkedState);
+            }
+        }
+
+        const setCheckboxes = function () {
+            allItems = Object.keys(localStorage)
+            allItems.forEach(item => {
+                if (item.match("gameForm300Check-[0-9]*")) {
+                    document.getElementById(item).checked = true
+                }
+            })
+        }
+
+        setCheckboxes()
+
         $("input").on("click", myCount);
+        $("input").on("click", updateStorage);
     </script>
 </html>
