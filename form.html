@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <style>
+            @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400&display=swap');
+
+            body {
+                font-family: 'Nunito';
+                margin: 30px 30px 30px;
+            }
+
+            h2 {
+                margin: 20px 0 10px;
+                font-size: 30px;
+            }
+
+            .js-container {
+                display: inline-flex;
+                flex-direction: column;
+                /* width: 80vw; */
+                max-height: 210vh;
+                flex-wrap: wrap;
+            }
+
+            .checkbox-wrapper {
+                display: flex;
+                flex-direction: row;
+                margin: 10px 40px 10px 0;
+            }
+
+            form label {                
+                display: flex;
+                align-items: center;
+            }
+
+            form input {
+                margin-right: 10px;
+                width: 20px;
+                height: 20px;
+            }
+
+            form label:hover {
+                cursor: pointer;
+            }
+
+            #output_field {
+                margin-bottom: 12px;
+                font-size: 24px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Насколько ты геймер?</h2>
+        <div id="output_field"></div>
+
+        <div>
+            <form class="js-container">
+
+            </form>
+        </div>
+    </body>
+    <script>
+        let dataList = [
+        'Ace Attorney',
+        'Ace Combat',
+        'Adventure Island',
+        'Age of Empires',
+        'Age of Wonder',
+        'Alan Wake',
+        'Alex Kidd',
+        'Alien',
+        'Alone In The Dark',
+        'Amnesia',
+        'Anno',
+        'Another Code',
+        'Arcana Heart',
+        'ArmA',
+        'Army of Two',
+        'Assassin\'s Creed',
+        'Asterix & Obelix',
+        'Baldur\'s Gate',
+        'Banjo-Kazooie',
+        'Bard\'s Tale',
+        'Batman',
+        'Battlefield',
+        'Beholder',
+        'BioShock',
+        'Black Mirror',
+        'Blood Bowl',
+        'BloodRayne',
+        'Borderlands',
+        'Broken Sword',
+        'Brothers in Arms',
+        'Burnout',
+        'Call of Cthulhu',
+        'Call of Duty',
+        'Call of Juarez',
+        'Carmageddon',
+        'Castlevania',
+        'Cat Quest',
+        'Chronicles of Riddick',
+        'Civilization',
+        'Command & Conquer',
+        'Company of Heroes',
+        'Condemned',
+        'Contra',
+        'Counter-Strike',
+        'Crackdown',
+        'Crash Bandicoot',
+        'Creepy Tale',
+        'Crusader Kings',
+        'Darkness (The)',
+        'Dark Pictures Anthology (The)',
+        'Darksiders',
+        'Dark Souls',
+        'Dead Island',
+        'Dead Rising',
+        'Dead Space',
+        'Dead or Alive',
+        'Delta Force',
+        'Deponia',
+        'Desperados',
+        'Destiny',
+        'Destroy All Humans',
+        'Deus Ex',
+        'Devil May Cry',
+        'Diablo',
+        'Disgaea',
+        'Dishonored',
+        'Divinity',
+        'Division (The)',
+        'Donkey Kong',
+        'DOOM',
+        'DOTA',
+        'Double Dragon',
+        'Dragon Age',
+        'Dragon Ball',
+        'Dragon Quest',
+        'Duke Nukem',
+        'Dying Light',
+        'Dynasty Warriors',
+        'Edna & Harvey',
+        'Elder Scrolls (The)',
+        'Empire Earth',
+        'Europa Universalis',
+        'Evil Genius',
+        'Evil Within',
+        'F.E.A.R.',
+        'Fable',
+        'Fallout',
+        'Far Cry',
+        'Fatal Frame',
+        'FIFA',
+        'Final Fantasy',
+        'FlatOut',
+        'Forbidden Siren',
+        'Forza',
+        'Gears of War',
+        'Ghost Recon',
+        'God of War',
+        'Godfather',
+        'Golden Axe',
+        'Gothic',
+        'Gran Turismo',
+        'Grand Theft Auto',
+        'Guacamelee!',
+        'Guilty Gear',
+        'Gundam',
+        'Half-Life',
+        'Halo',
+        'Harry Potter',
+        'Hearts of Iron',
+        'Heroes of Might and Magic',
+        'Hitman',
+        'Homefront',
+        'Homeworld',
+        'Horizon',
+        'Hot Wheels',
+        'Hotline Miami',
+        'House of the Dead',
+        'How to Survive',
+        'Infamous',
+        'Injustice',
+        'Insurgency',
+        'Jak & Daxter',
+        'James Bond',
+        'Just Cause',
+        'Kane & Linch',
+        'Kao the Kangaroo',
+        'Killing Floor',
+        'Killzone',
+        'Kingdom Hearts',
+        'King of Fighters (The)',
+        'King\'s Bounty',
+        'Kirby',
+        'Klonoa',
+        'Last of Us (The)',
+        'Left 4 Dead',
+        'Legend of Zelda (The)',
+        'LEGO',
+        'Leisure Suit Larry',
+        'Life is Strange',
+        'LittleBigPlanet',
+        'Little Nightmares',
+        'LocoRoco',
+        'Longest Journey (The)',
+        'Lord of Rings (The)',
+        'Lost in Blue',
+        'Lost Planet',
+        'Madden NFL',
+        'Mafia',
+        'Magicka',
+        'Mario',
+        'Mass Effect',
+        'Max Payne',
+        'Medal of Honor',
+        'Mega Man',
+        'Megami Tensei',
+        'Metal Gear',
+        'Metal Slug',
+        'Metro',
+        'Metroid',
+        'Middle-earth',
+        'Midnight Club',
+        'Mirror\'s Edge',
+        'Monkey Island',
+        'Monster Hunter',
+        'Mortal Kombat',
+        'MotorStorm',
+        'Mount & Blade',
+        'Myst',
+        'Nancy Drew',
+        'Naruto',
+        'Need for Speed',
+        'NBA',
+        'NHL',
+        'NieR',
+        'Ninja Gaiden',
+        'Nioh',
+        'No One Lives Forever',
+        'Oddworld',
+        'Onimusha',
+        'Operation Flashpoint',
+        'Orcs Must Die',
+        'Ori',
+        'Outer Worlds (The)',
+        'Overlord',
+        'Pac-Man',
+        'Painkiller',
+        'Patapon',
+        'Pathfinder',
+        'Payday',
+        'Penumbra',
+        'Persona',
+        'Pikmin',
+        'Pillars of Eternity',
+        'Plague Tale (A)',
+        'Plants vs. Zombies',
+        'Pokémon',
+        'Portal',
+        'Postal',
+        'Prey',
+        'Prince of Persia',
+        'Project Gotham Racing',
+        'Prototype',
+        'Quake',
+        'RAGE',
+        'Rainbow Six',
+        'Ratchet & Clank',
+        'Rayman',
+        'Red Dead',
+        'Red Faction',
+        'Risen',
+        'Rising Storm',
+        'Resident Evil',
+        'Resistance',
+        'Ridge Racer',
+        'Rise of Nations',
+        'Rusty Lake',
+        'Runaway',
+        'S.T.A.L.K.E.R.',
+        'SOCOM',
+        'Sacred',
+        'Saints Row',
+        'Sam & Max',
+        'Samorost',
+        'Samurai Warriors',
+        'Serious Sam',
+        'Settlers (The)',
+        'Shadowrun',
+        'Sherlock Holmes',
+        'Silent Hill',
+        'SimCity',
+        'Sims (The)',
+        'Sly Cooper',
+        'Sniper Elite',
+        'Soldier of Fortune',
+        'Sonic the Hedgehog',
+        'Soulcalibur',
+        'South Park',
+        'Spider-Man',
+        'Splatoon',
+        'Splinter Cell',
+        'SpongeBob SquarePants',
+        'Spyro',
+        'Star Trek',
+        'Star Wars',
+        'Starcraft',
+        'Stardew Valley',
+        'State of Decay',
+        'Street Fighter',
+        'Streets of Rage',
+        'Stronghold',
+        'Styx',
+        'Supreme Commander',
+        'Syberia',
+        'Syphon Filter',
+        'System Shock',
+        'Teenage Mutant Ninja Turtles',
+        'Team Fortress',
+        'Tekken',
+        'Tetris',
+        'Thief',
+        'Time Crisis',
+        'Titanfall',
+        'Titan Quest',
+        'Tomb Raider',
+        'Tony Hawk\'s',
+        'Total War',
+        'TrackMania',
+        'Tropico',
+        'True Crime',
+        'Turok',
+        'Twisted Metal',
+        'Ty The Tasmanian Tiger',
+        'Uncharted',
+        'Unreal Tournament',
+        'Valkyrie Chronicles',
+        'Victoria',
+        'Virtua Fighter',
+        'Walking Dead (The)',
+        'Warcraft',
+        'Warhammer',
+        'Warhammer 40k',
+        'Wario',
+        'Wasteland',
+        'Watch Dogs',
+        'Way of the Samurai',
+        'Witcher (The)',
+        'Wolfenstein',
+        'Wonder Boy',
+        'Worms',
+        'XCOM',
+        'Yakuza',
+        'Yooka-Laylee',
+        'Yu-Gi-Oh!',
+        'Zeno Clash',
+        'Zero Escape',
+        'Братья Пилоты',
+        'В тылу врага',
+        'Корсары',
+        'Петька',
+        'Смерть шпионам'
+        ];
+
+        const containerNode = document.querySelector('.js-container');
+        dataList.forEach((labelText, index) => {
+            const div = document.createElement('div');
+            div.setAttribute('class', 'checkbox-wrapper');
+
+            const input = document.createElement('input');
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('id', 'check-' + index);
+
+            const label = document.createElement('label');
+            label.setAttribute('for', 'check-' + index);
+            label.innerHTML = labelText;
+
+            div.appendChild(input);
+            div.appendChild(label);
+            containerNode.appendChild(div);
+        });
+    </script>
+    
+    <script>
+        let myCount = function () {
+            let checkedPoints = $("input:checked").length;
+            $("#output_field").html("Выбрано " + checkedPoints + " из " + $(".checkbox-wrapper").length + " серий игр (" + (checkedPoints / $(".checkbox-wrapper").length * 100).toFixed(0) + "%)");
+            };
+        myCount();
+
+        $("input").on("click", myCount);
+    </script>
+</html>
