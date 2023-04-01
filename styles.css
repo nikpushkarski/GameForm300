@@ -2,26 +2,79 @@
 
 body {
   font-family: "Nunito";
-  margin: 30px 30px 30px;
+  position: relative;
+  margin: 0;
+}
+
+.header {
+  position: sticky;
+  top: 0;
+  left: 0;
+  background: #f2f2f2;
+  padding: 15px 30px 10px 30px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #cccccc;
+  color: #373a36;
+  z-index: 1;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.rybin {
+  position: absolute;
+  height: 160px;
+  aspect-ratio: 1/1;
+  bottom: 0;
+  right: 0;
 }
 
 h2 {
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
   font-size: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+h3 {
+  max-width: 1200px;
+  margin: 0.5em auto 0 auto;
+  text-align: center;
+  font-size: 20px;
+}
+
+#output_field {
+  margin-bottom: 12px;
+  font-size: 40px;
+  font-weight: 700;
+  max-width: 1200px;
+  margin: 0.3em auto 0 auto;
+}
+
+.container-wrapper {
+  margin: 20px auto 0;
+  max-width: 1200px;
 }
 
 .js-container {
   display: inline-flex;
   flex-direction: column;
-  /* width: 80vw; */
-  max-height: 210vh;
+  align-items: space-between;
+  width: 100%;
+  /* height: 151vmax; */
+  height: 3888px;
   flex-wrap: wrap;
+  padding: 10px 30px;
+  box-sizing: border-box;
+  overflow: hidden;
 }
 
 .checkbox-wrapper {
   display: flex;
   flex-direction: row;
-  margin: 10px 40px 10px 0;
+  margin: 10px 0;
 }
 
 form label {
@@ -31,15 +84,56 @@ form label {
 
 form input {
   margin-right: 10px;
-  width: 20px;
-  height: 20px;
+  width: 25px;
+  height: 25px;
 }
 
+form input:hover,
 form label:hover {
   cursor: pointer;
 }
 
-#output_field {
-  margin-bottom: 12px;
-  font-size: 24px;
+@media (max-width: 1000px) {
+  .js-container {
+    height: calc(3888px * 1.5);
+  }
+
+  h2 {
+    font-size: 25px;
+  }
+
+  h3 {
+    font-size: 15px;
+  }
+
+  #output_field {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 840px) {
+  .rybin {
+    display: none;
+  }
+}
+
+@media (max-width: 750px) {
+  .js-container {
+    height: calc(3888px * 1.98);
+  }
+}
+
+@media (max-width: 550px) {
+  .js-container {
+    height: 100%;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+
+  h3 {
+    font-size: 12px;
+    max-width: 200px;
+  }
 }
