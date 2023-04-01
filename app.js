@@ -1,8 +1,11 @@
 import gamesList from "./games.js";
+
 import {
   myCount,
   updateStorage,
-  setCheckboxes
+  setCheckboxes,
+  selectAll,
+  clearAll
 } from "./helpers.js"
 
 const containerNode = document.querySelector(".js-container");
@@ -30,3 +33,6 @@ myCount();
 
 $("input").on("click", myCount);
 $("input").on("click", updateStorage);
+
+$("#select_all").on("click", selectAll);
+$("#clear_all").on("click", clearAll);

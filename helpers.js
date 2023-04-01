@@ -32,3 +32,23 @@ export const setCheckboxes = function () {
     }
   });
 };
+
+export const selectAll = function () {
+  const allCheckboxes = $("input").toArray();
+  console.log("setAll");
+  allCheckboxes.forEach((e) => {
+    e.checked = true;
+    localStorage.setItem(e.id, e.checked);
+  });
+  myCount();
+};
+
+export const clearAll = function () {
+  const allCheckboxes = $("input").toArray();
+  console.log("clearAll");
+  allCheckboxes.forEach((e) => {
+    e.checked = false;
+    localStorage.removeItem(e.id);
+  });
+  myCount();
+};
